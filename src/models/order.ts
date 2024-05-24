@@ -1,8 +1,17 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types, Document } from "mongoose";
 
-const OrderSchema = new Schema(
+interface IOrder extends Document {
+  products: [product: Types.ObjectId, quantity: number];
+  user_id?: Types.ObjectId;
+  orderDate: Date;
+  status: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const OrderSchema = new Schema<IOrder>(
   {
-    user: {
+    user_id: {
       type: Types.ObjectId,
       ref: "User",
       required: true,
@@ -34,4 +43,6 @@ const OrderSchema = new Schema(
   { timestamps: true }
 );
 
-export const Order = model("Order", OrderSchema);
+const Order = model<IOrder>("Order", OrderSchema);
+
+export { Order, IOrder };

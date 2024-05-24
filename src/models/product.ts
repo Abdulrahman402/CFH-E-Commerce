@@ -1,6 +1,16 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
-const ProductSchema = new Schema(
+interface IProduct extends Document {
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  user_id?: Types.ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const ProductSchema = new Schema<IProduct>(
   {
     name: {
       type: String,
@@ -18,8 +28,15 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
+    user_id: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-export const Product = model("Product", ProductSchema);
+const Product = model<IProduct>("Product", ProductSchema);
+
+export { Product, IProduct };

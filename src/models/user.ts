@@ -1,7 +1,17 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types, Document } from "mongoose";
 import { hash, genSalt } from "bcrypt";
 
-const UserSchema = new Schema(
+interface IUser extends Document {
+  name: string;
+  password: string;
+  email: string;
+  role: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  orders?: [];
+}
+
+const UserSchema = new Schema<IUser>(
   {
     name: {
       type: String,
@@ -22,6 +32,11 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
     orders: [{ type: Types.ObjectId, ref: "Order" }],
   },
   { timestamps: true }
@@ -38,4 +53,6 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-export const User = model("User", UserSchema);
+const User = model<IUser>("User", UserSchema);
+
+export { User, IUser };

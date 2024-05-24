@@ -1,20 +1,14 @@
 import { Request } from "express";
+import { Types } from "mongoose";
 
-export interface AuthenticatedRequest extends Request {
-  user?: { id: string };
-}
-export interface UserPayload {
-  id: string;
-}
-
-export interface ValidatedToken {
-  valid: boolean;
-  payload: UserPayload;
+export interface JWTPayload {
+  _id: string;
+  role: string;
 }
 
-export interface InvalidToken {
-  valid: boolean;
-  payload: null;
+export interface CustomRequest extends Request {
+  user?: {
+    _id: Types.ObjectId;
+    role: string;
+  };
 }
-
-export type ValidationResult = ValidatedToken | InvalidToken;
