@@ -12,7 +12,7 @@ export class OrderController {
   async getOrders(req: CustomRequest, res: Response) {
     const order = await OrderRepo.getOrders(req.user!._id);
 
-    res.send(order);
+    res.send(order || []);
   }
 }
 

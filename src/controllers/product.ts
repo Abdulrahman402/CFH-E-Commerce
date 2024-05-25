@@ -28,7 +28,7 @@ export class ProductController {
   async allByUser(req: CustomRequest, res: Response) {
     const products = await ProductRepo.allProductsByUser(req.user!._id);
 
-    res.send(products);
+    res.send(products || []);
   }
 
   async updateProduct(req: CustomRequest, res: Response) {

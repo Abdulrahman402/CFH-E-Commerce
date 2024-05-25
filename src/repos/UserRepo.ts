@@ -21,6 +21,16 @@ class UserRepo {
       logger.error(`Failed to get user by email ${e}`);
     }
   }
+
+  async userById(user_id: string) {
+    try {
+      const user = await User.findById({ _id: user_id });
+
+      return user;
+    } catch (e) {
+      logger.error(`Failed to get user by id  ${e}`);
+    }
+  }
 }
 
 export default new UserRepo();

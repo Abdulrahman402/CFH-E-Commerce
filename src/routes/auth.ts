@@ -12,11 +12,11 @@ export const authRouter = createRouter({
 authRouter.post(
   "/signUp",
   validateRequest(signUpSchema),
-  async (req, res) => await AuthController.signUp(req, res)
+  async (req, res, next) => await AuthController.signUp(req, res, next)
 );
 
 authRouter.post(
   "/login",
   validateRequest(loginSchema),
-  async (req, res) => await AuthController.login(req, res)
+  async (req, res, next) => await AuthController.login(req, res, next)
 );
