@@ -20,18 +20,27 @@ This is a Node.js/Express e-commerce application using TypeScript, Mongoose, and
 
 2. Install dependencies:
 
+   ```sh
    npm install
+
+   ```
 
 3. Create a .env file in the root directory and add the following variables:
 
-   PORT=3000
-   DATABASE_URL=mongodb://localhost:27017/CFH
-   ACCESS_TOKEN_SECRET=your_access_token_secret
-   REFRESH_TOKEN_SECRET=your_refresh_token_secret
+```sh
+  PORT=3000,
+  DATABASE_URL=mongodb://localhost:27017/CFH,
+  ACCESS_TOKEN_SECRET=your_access_token_secret,
+  REFRESH_TOKEN_SECRET=your_refresh_token_secret
+
+```
 
 4. Start the MongoDB server:
 
+   ```sh
    mongod
+
+   ```
 
 ## Running the Application
 
